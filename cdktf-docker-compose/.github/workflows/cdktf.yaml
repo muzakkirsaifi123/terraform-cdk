@@ -1,0 +1,40 @@
+name: CDKTF Validation
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  cdktf:
+    name: CDKTF Validate & Synth
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧾 Checkout code
+        uses: actions/checkout@v3
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+
+      - name: 📦 Set up Pipenv
+        run: pip install pipenv
+
+      - name: 📥 Install dependencies
+        run: pipenv install
+
+      - name: 🧰 Install CDKTF CLI
+        run: npm install -g cdktf-cli
+
+      - name: 📡 Install providers
+        run: pipenv run cdktf get
+
+      - name: 🧱 CDKTF synth
+        run: pipenv run cdktf synth
+
+      - name: ✅ Terraform validate
+        run: terraform validate
+        working-directory: cdk.out
