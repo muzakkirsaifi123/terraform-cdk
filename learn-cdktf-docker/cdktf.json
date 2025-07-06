@@ -1,0 +1,12 @@
+{
+  "language": "python",
+  "app": "pipenv run python main.py",
+  "projectId": "e43e9395-517f-4eca-bf2b-824244588ce5",
+  "sendCrashReports": "false",
+  "terraformProviders": [
+    "kreuzwerker/docker@~> 2.24.0"
+  ],
+  "terraformModules": [],
+  "codeMakerOutput": "imports",
+  "context": {}
+}
